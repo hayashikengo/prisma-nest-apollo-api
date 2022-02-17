@@ -1,0 +1,19 @@
+version: '3'
+
+networks:
+  overlay:
+
+services:
+  mydb:
+    image: mysql:5.7
+    env_file:
+      - ./docker/mysql.env
+    container_name: "mydb"
+    restart: "no"
+    ports:
+      - 4406:3306
+    volumes:
+      - ./docker/conf/mysql.cnf:/etc/mysql/conf.d/mysql.conf.cnf
+      - ./docker/data:/var/lib/mysql
+    networks:
+      - overlay
